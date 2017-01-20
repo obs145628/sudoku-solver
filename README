@@ -1,0 +1,63 @@
+Sudoku
+
+# Compilation:
+
+mkdir build
+cd build
+cmake ..
+make
+
+# Usage
+
+./sudoku-solver <level> <algo>
+
+./sudoku-solver <level> bench <algos...> <n>
+
+level:
+  0: beginner (50)
+  1: easy (40)
+  2: medium (33)
+  3: hard (26)
+  4: extreme (17)
+  5: hardcore (17)
+
+algo:
+  dump:     basic algorithm look for unique solutions, and choose randomly if several
+            possibles
+            
+  btk:      Backtracking : basic CST solver using DFS and backtracking
+  
+  fc:       Forward Checking : backtracking + forward checking : when an asignement is
+            made, check contrainsts with the assigned variable
+            
+  arc:      backtracking + arc consistency : when an assignment is made, check contraints
+            with the asigned variable, and resursively with other variables if necesary
+            until all the SCP is arc consistent.
+            
+  fc+mrv:   Forward checking + Minimum Remaining Values: When choosing a variable to be
+            assigned, choose the one with the minimum remaining values
+            
+  arc+mrv:  Arc consistency + Minimum remaining values
+  
+  fc++:     Forward Checking + Minimum Remaining Values + Least Constraining Values
+            Chose to assign the values that rules out the minimum number of values first
+            
+  arc++:    Arc consistency + Minimum Remaining Values + Least Constraining Values
+  
+  climb:    Hill Climbing: Start with a randomn solution with n errors.
+            From all neighors pick the one with thte minimum eror n2.
+            If n2 < n: it becomes the new solution and continue
+            otherwise stop and returns the current solution
+            Neighbor of a solution: this solution with 2 values swapped.
+
+  sa:       Simulated Annealing: Start with a random solution with n errors.
+            T temperature, decreasing over time.
+            Stop when T = 0
+            Select a random neighbour with error n2.
+            delta <- n2 - n
+            if delta > 0: it becames the new solution
+            otherwise: it becames the new solution with probability exp(delta/T)
+
+  bench: launch specified algos and print statistics
+
+n : number of sudokus in bench mode, default is 1
