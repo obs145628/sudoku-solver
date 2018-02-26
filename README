@@ -2,10 +2,15 @@ Sudoku
 
 # Compilation:
 
+```
+git submodule init
+git submodule sync
+git submodule update
 mkdir build
 cd build
 cmake ..
 make
+```
 
 # Usage
 
