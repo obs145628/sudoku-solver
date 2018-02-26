@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <iostream>
 #include "ai/io/dir.hh"
-#include "ai/math/random.hh"
+#include "ai/misc/random.hh"
 #include "ai/shell/shell.hh"
 #include "ai/shell/shell-canvas.hh"
 #include "ai/shell/timer.hh"
@@ -16,7 +16,7 @@ Game load_game(const std::string& type)
 {
   static Random rand;
   auto files = Dir::list_files("../grids/" + type);
-  auto name = files[rand.int32_get() % files.size()];
+  auto name = files[rand.next_long() % files.size()];
   auto path = "../grids/" + type + "/" + name;
   return Game::load(path);
 }
@@ -148,7 +148,7 @@ int main(int argc, char** argv)
   Game g2 = g;
 
   {
-    ShellCanvas cvs;
+      ShellCanvas &cvs = ShellCanvas::instance();
     cvs.draw_sprite(0, 0, g.to_sprite());
     cvs.render();
     g2.canvas_set(&cvs);

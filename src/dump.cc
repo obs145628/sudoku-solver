@@ -3,7 +3,7 @@
 #include <set>
 #include <utility>
 #include <vector>
-#include "ai/math/random.hh"
+#include "ai/misc/random.hh"
 
 #include <iostream>
 
@@ -35,7 +35,7 @@ public:
           break;
 
         int x = vals.size() == 1 ? vals[0]
-          : vals[rand_.int32_get() % vals.size()];
+          : vals[rand_.next_long() % vals.size()];
         g_.cell_set(c.i, c.j, x);
 
         cells_.erase(cells_.begin() + pos);

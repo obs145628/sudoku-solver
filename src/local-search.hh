@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ai/math/random.hh"
+#include "ai/misc/random.hh"
 #include "game.hh"
 
 class LocalSearch

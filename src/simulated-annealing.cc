@@ -34,7 +34,7 @@ void SimulatedAnnealing::exec_()
         {
           double delta = next_err - err;
           double proba = std::exp( - delta / t);
-          if (rand_.double_get() > proba)
+          if (rand_.next_double() > proba)
             continue;
         }
 
@@ -57,9 +57,9 @@ double SimulatedAnnealing::temperature_(unsigned i)
 SimulatedAnnealing::successor_t
 SimulatedAnnealing::next_()
 {
-  unsigned a = rand_.int32_get() % pos_.size();
-  unsigned b = rand_.int32_get() % pos_.size();
+  unsigned a = rand_.next_long() % pos_.size();
+  unsigned b = rand_.next_long() % pos_.size();
   while (a == b)
-    b = rand_.int32_get() % pos_.size();
+    b = rand_.next_long() % pos_.size();
   return {a, b};
 }

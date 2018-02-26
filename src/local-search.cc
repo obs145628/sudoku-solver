@@ -41,7 +41,7 @@ void LocalSearch::build_vals_()
   auto n = vals_.size();
   for (auto i = n; i > 0; --i)
     {
-      auto j = rand_.int32_get() % i;
+      auto j = rand_.next_long() % i;
       std::swap(vals_[i - 1], vals_[j]);
     }
 }
